@@ -2,8 +2,10 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, HttpResponse, redirect
-from random import randint
 from models import *
+from random import randint
+
+import md5
 
 def index(request):
 	context = {
@@ -13,14 +15,15 @@ def index(request):
 		"purple": House.objects.get(id=4).students.all()
 	}
 
-	print(context["red"])
-
 	return render(request, "index.html", context)
 
 def sort(request):
 	if request.method == "POST":
 		name = request.POST["name"]
-		new_house = House.objects.get(id=randint(1, 4))
+
+		# Sorts based on student's name's md5 hash
+		# converted to base 10, then modulus 4
+		new_house = House.objects.get(id=int(md5.new(name).hexdigest(), 16) % 4)
 
 		Student.objects.create(name=name, house=new_house)
 

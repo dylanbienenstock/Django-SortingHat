@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+	</head>
+
+	<body>
+		<form action="/sort" method="post">
+			{% csrf_token %}
+
+			<input type="text" name="name">
+			<input type="submit">
+		</form>
+
+		<h1>Red</h1>
+		{% for student in red %}
+			<p>{{student.name}}</p>
+		{% empty %}
+			<p style="font-style: italic;">Nobody here!</p>	
+		{% endfor %}
+
+		<h1>Blue</h1>
+		{% for student in blue %}
+			<p>{{student.name}}</p>
+		{% empty %}
+			<p style="font-style: italic;">Nobody here!</p>	
+		{% endfor %}
+
+		<h1>Green</h1>
+		{% for student in green %}
+			<p>{{student.name}}</p>
+		{% empty %}
+			<p style="font-style: italic;">Nobody here!</p>	
+		{% endfor %}
+
+		<h1>Purple</h1>
+		{% for student in purple %}
+			<p>{{student.name}}</p>
+		{% empty %}
+			<p style="font-style: italic;">Nobody here!</p>	
+		{% endfor %}
+	</body>
+</html>

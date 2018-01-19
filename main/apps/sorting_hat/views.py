@@ -23,7 +23,8 @@ def sort(request):
 
 		# Sorts based on student's name's md5 hash
 		# converted to base 10, then modulus 4
-		new_house = House.objects.get(id=int(md5.new(name).hexdigest(), 16) % 4)
+		house_id = (int(md5.new(name).hexdigest(), 16) % 4) + 1
+		new_house = House.objects.get(id=house_id)
 
 		Student.objects.create(name=name, house=new_house)
 
